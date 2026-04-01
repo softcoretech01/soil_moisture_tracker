@@ -1,0 +1,17 @@
+services:
+  soil_backend:
+    build:
+      context: ./backend  # This tells Docker to look in the backend folder
+      dockerfile: Dockerfile
+    container_name: soil_backend_container
+    restart: always
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:soil!tracker@0108@soil_mysql_standalone:3306/soil_tracker_db
+    volumes:
+      - ./backend:/app
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    external: true
